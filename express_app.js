@@ -13,6 +13,9 @@ server.listen(PORT, function () {
     console.log('Server has started running in express');
     mongoose.connect(process.env.MONGO_DB_ATLAS).then(function () {
         console.log('DB is connected');
+        server.get('/',function (req, res) {
+            res.status(200).json({success: true, message: 'Welcome to Tee Bhaggs Todo API'})
+        })
         server.get('/todo', todoController.getAllTodo);
         server.get('/todo/:id', todoController.getTodoById);
         server.post('/todo', todoController.insertTodo);
